@@ -9,39 +9,35 @@ import { Beat04ThirdWave } from "@/components/beats/Beat04ThirdWave";
 import { Beat05DayArc } from "@/components/beats/Beat05DayArc";
 import { Beat06Science } from "@/components/beats/Beat06Science";
 import { Beat07TenMinutes } from "@/components/beats/Beat07TenMinutes";
-import { PlaceholderBeat } from "@/components/PlaceholderBeat";
+import { Beat08TheBox } from "@/components/beats/Beat08TheBox";
+import { Beat09SignOff } from "@/components/beats/Beat09SignOff";
 
 export default function Page() {
   const lenisRef = useLenis();
 
   return (
-    <main>
+    <>
+      {/* Skip-to-content link — visible only when focused */}
+      <a
+        href="#main-content"
+        className="sr-only z-50 rounded-full bg-bone px-4 py-2 font-mono text-[0.7rem] uppercase tracking-eyebrow text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        Skip to content
+      </a>
+
       <Nav />
-      <Beat01ColdOpen />
-      <Beat02Diagnosis />
-      <Beat03Reveal lenisRef={lenisRef} />
 
-      <Beat04ThirdWave />
-      <Beat05DayArc />
-      <Beat06Science />
-      <Beat07TenMinutes />
-      <PlaceholderBeat
-        id="08"
-        title="The Box"
-        hint="15 days. Three states. One box. ₹499. Phase 4."
-      />
-      <PlaceholderBeat
-        id="09"
-        title="Sign-Off"
-        hint="Sleep is a feature. Not a luxury. Phase 4."
-      />
-
-      <footer className="border-t border-char bg-ink px-md py-lg">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-sm font-mono text-[0.7rem] uppercase tracking-eyebrow text-mute md:flex-row">
-          <span>lixx · made in bangalore</span>
-          <span>FSSAI Lic. No. [pending] · Nutraceutical</span>
-        </div>
-      </footer>
-    </main>
+      <main id="main-content" tabIndex={-1} className="outline-none">
+        <Beat01ColdOpen />
+        <Beat02Diagnosis />
+        <Beat03Reveal lenisRef={lenisRef} />
+        <Beat04ThirdWave />
+        <Beat05DayArc />
+        <Beat06Science />
+        <Beat07TenMinutes />
+        <Beat08TheBox />
+        <Beat09SignOff />
+      </main>
+    </>
   );
 }
