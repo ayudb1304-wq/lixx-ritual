@@ -64,37 +64,37 @@ Phase 1 is done when all of the following are true:
 - `pnpm add gsap lenis`
 - Commit: `chore: scaffold next.js app`
 
-Decision to confirm with the user before executing: does the Next.js app live **at the repo root** or in a `web/` subdirectory? The business doc (`Lixx doc 1.md`) sharing the repo suggests a subdirectory is cleaner. Default plan: `web/` subdirectory.
+The Next.js app lives **at the repo root**. Docs live in `docs/`. (Initial draft defaulted to a `web/` subdirectory; we restructured to root so Vercel auto-detects Next.js without a Root Directory override.)
 
 ### Step 2 — Design system
 Files:
-- `web/app/globals.css` — every token from design.md § 4 and § 5 as CSS variables, fluid type scale via `clamp()`, Lenis classes, split-text primitive classes, global `prefers-reduced-motion` override, body defaults.
-- `web/tailwind.config.ts` — colors (`ink`, `bone`, `char`, `mute`, `charge`, `zen`, `dream`), fontFamily (`display`, `sans`, `mono`), letterSpacing (`tightest -0.04em`, `eyebrow +0.18em`), content globs.
-- `web/app/layout.tsx` — `next/font` for Inter / Fraunces / JetBrains Mono, metadata, body class `bg-ink text-bone font-sans antialiased`.
+- `app/globals.css` — every token from design.md § 4 and § 5 as CSS variables, fluid type scale via `clamp()`, Lenis classes, split-text primitive classes, global `prefers-reduced-motion` override, body defaults.
+- `tailwind.config.ts` — colors (`ink`, `bone`, `char`, `mute`, `charge`, `zen`, `dream`), fontFamily (`display`, `sans`, `mono`), letterSpacing (`tightest -0.04em`, `eyebrow +0.18em`), content globs.
+- `app/layout.tsx` — `next/font` for Inter / Fraunces / JetBrains Mono, metadata, body class `bg-ink text-bone font-sans antialiased`.
 
 Verify by rendering a throwaway page that prints every color and type token.
 
 ### Step 3 — Hooks
-All under `web/lib/hooks/`:
+All under `lib/hooks/`:
 - `useIsoLayoutEffect.ts` — SSR-safe `useLayoutEffect` shim
 - `useReducedMotion.ts` — reads `matchMedia("(prefers-reduced-motion: reduce)")` and subscribes to changes
 - `useLenis.ts` — initializes Lenis once; bails on reduced motion; binds `lenis.on("scroll", ScrollTrigger.update)`; adds `lenis.raf` to `gsap.ticker`; `gsap.ticker.lagSmoothing(0)`; returns/cleans up properly
 
 ### Step 4 — Utils
-- `web/lib/utils/splitText.ts` — pure DOM word splitter, preserves whitespace, wraps in `.split-line` / `.split-word`, returns the word-span array
+- `lib/utils/splitText.ts` — pure DOM word splitter, preserves whitespace, wraps in `.split-line` / `.split-word`, returns the word-span array
 
 ### Step 5 — Primitives
-All under `web/components/primitives/`:
+All under `components/primitives/`:
 - `SplitText.tsx` — client component; `gsap.context()`; `useIsoLayoutEffect`; animates `yPercent: 110 → 0` with `expo.out`; props: `children`, `trigger?`, `delay?`, `duration?`, `stagger?`; reduced-motion snap; `ctx.revert()` cleanup
 - `LollipopRender.tsx` — CSS gemstone; `color: 'charge' | 'zen' | 'dream'`, `size?`, `glow?`; **SWAP POINT** comment for the future GLB/sprite asset
 - `CursorDot.tsx` — fixed 8px dot, rAF lerp to cursor; hidden on touch and reduced motion
 - `MagneticButton.tsx` — GSAP `quickTo` translate within radius; `onMouseLeave` resets. (Built in Phase 1 so Phase 3's Beat 07 doesn't need to backfill primitives.)
 
 ### Step 6 — Nav
-- `web/components/Nav.tsx`: fixed top; hidden until `window.scrollY > window.innerHeight * 0.8`; 700ms opacity fade; left = `lixx` wordmark, center (md+) = Science · The Box · FAQ, right = `Get the box` pill; `aria-hidden` toggles with visibility.
+- `components/Nav.tsx`: fixed top; hidden until `window.scrollY > window.innerHeight * 0.8`; 700ms opacity fade; left = `lixx` wordmark, center (md+) = Science · The Box · FAQ, right = `Get the box` pill; `aria-hidden` toggles with visibility.
 
 ### Step 7 — Beats 01, 02, 03 (full polish)
-Under `web/components/beats/`.
+Under `components/beats/`.
 
 **`Beat01ColdOpen.tsx`**
 - `min-h-[100svh] bg-ink flex items-center justify-center`
@@ -130,7 +130,7 @@ Under `web/components/beats/`.
 Single shared component `PlaceholderBeat.tsx` that renders `min-h-[100svh]`, section label in mono (`BEAT 04 — THIRD WAVE`, etc.), and a short note pulled from design.md § 3. This keeps the scroll length representative and exposes any Lenis/ScrollTrigger quirks now rather than in Phase 3.
 
 ### Step 9 — Page assembly
-`web/app/page.tsx` imports beats in order and calls `useLenis()`:
+`app/page.tsx` imports beats in order and calls `useLenis()`:
 ```
 <Beat01ColdOpen />
 <Beat02Diagnosis />
@@ -152,7 +152,7 @@ Single shared component `PlaceholderBeat.tsx` that renders `min-h-[100svh]`, sec
 ## 5. Phase 1 file tree (new files)
 
 ```
-web/
+/                         # Next.js app at repo root
   app/
     layout.tsx
     page.tsx
@@ -178,13 +178,18 @@ web/
       splitText.ts
   tailwind.config.ts
   README.md
+  docs/                   # design & strategy docs (not shipped)
+    design.md
+    implementation (1).md
+    Lixx doc 1.md
+    phase-1-plan.md
 ```
 
 ---
 
 ## 6. Risks and open questions
 
-1. **Repo layout** — Does the Next.js app live at repo root or in `web/`? Business doc sharing the repo pushes me toward `web/`. **Needs confirmation before Step 1.**
+1. **Repo layout** — Resolved: Next.js app lives at the repo root; strategy / design / plan docs live in `docs/`. Chosen so Vercel auto-detects Next.js without a Root Directory override.
 2. **Font licensing** — Fraunces and Inter are OFL/Google-hosted, fine via `next/font`. JetBrains Mono likewise. No action needed.
 3. **GSAP free-plugin constraint** — `implementation (1).md` § 1 forbids `SplitText` and `ScrollSmoother`. The custom `splitText.ts` utility satisfies this. Do NOT reach for `gsap/SplitText`.
 4. **Lenis + ScrollTrigger pin behavior** — Pinning inside a Lenis-driven scroll has known footguns; the `gsap.ticker` bridge pattern in `useLenis.ts` is the required fix. Beat 02 is the first real test and must land before Beat 03 is trusted.
@@ -209,4 +214,4 @@ Proposed downstream phasing (for context only — not committed in this plan):
 
 ## 8. Immediate next action
 
-Confirm the `web/` subdirectory decision, then execute Step 1 (scaffold). The rest of Phase 1 is mechanical once the scaffold is in place.
+Phase 1 shipped on branch `claude/plan-phase-1-NQBga` and was merged into `main`. The app was subsequently relocated from `web/` to the repo root so Vercel's Next.js auto-detection works without a Root Directory override. Phase 2 picks up with Beat 04 (horizontal scroll-jack) and Beat 06 (Science).

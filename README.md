@@ -2,7 +2,7 @@
 
 Story-driven landing page for **Lixx**, an Isomalt-based functional lollipop brand from Bangalore. Three SKUs — **Charge** (3 PM energy), **Zen** (7 PM calm), **Dream** (11 PM sleep). Box of 15 for ₹499 on Blinkit, Zepto, Instamart.
 
-This is Phase 1 of the build. See `../phase-1-plan.md` for scope and `../design.md` for the 9-beat narrative spec. `../implementation (1).md` is the canonical build spec.
+This is Phase 1 of the build. See `docs/phase-1-plan.md` for scope and `docs/design.md` for the 9-beat narrative spec. `docs/implementation (1).md` is the canonical build spec. Strategic context lives in `docs/Lixx doc 1.md`.
 
 ## Quickstart
 
