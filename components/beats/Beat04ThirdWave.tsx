@@ -193,7 +193,7 @@ function Panel({ wave, stacked = false }: { wave: Wave; stacked?: boolean }) {
       className={
         stacked
           ? "wave-panel is-active flex flex-col gap-md border-t border-char py-lg"
-          : "wave-panel flex h-full w-screen shrink-0 items-center justify-center px-xl"
+          : "wave-panel flex h-full w-screen shrink-0 items-center justify-center px-md md:px-lg lg:px-xl"
       }
     >
       <div

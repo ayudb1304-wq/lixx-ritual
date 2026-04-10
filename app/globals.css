@@ -36,6 +36,15 @@
   --dur-fast: 0.4s;
   --dur-base: 0.8s;
   --dur-slow: 1.6s;
+
+  /* Nav — height + safe offset. Every beat references this so the
+     fixed nav never visually collides with a headline. */
+  --nav-h: 4rem;
+}
+
+/* Anchor jumps always land below the fixed nav, never under it. */
+section[id] {
+  scroll-margin-top: var(--nav-h);
 }
 
 /* -----------------------------------------------------------

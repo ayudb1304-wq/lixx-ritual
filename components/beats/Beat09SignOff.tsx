@@ -95,29 +95,29 @@ export function Beat09SignOff() {
         aria-label="Site footer"
         className="border-t border-char bg-ink px-md py-lg"
       >
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-sm text-center font-mono text-[0.7rem] uppercase tracking-eyebrow text-mute md:flex-row md:gap-md">
-          <a href="#box" className="hover:text-bone">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-xs text-center font-mono text-[0.7rem] uppercase tracking-eyebrow text-mute md:flex-row md:flex-wrap md:gap-md">
+          <a href="#box" className="transition-colors hover:text-bone">
             Shop
           </a>
-          <span aria-hidden="true">·</span>
-          <a href="#science" className="hover:text-bone">
+          <span aria-hidden="true" className="hidden md:inline">·</span>
+          <a href="#science" className="transition-colors hover:text-bone">
             Science
           </a>
-          <span aria-hidden="true">·</span>
+          <span aria-hidden="true" className="hidden md:inline">·</span>
           {/* TODO(post-launch): /faq route */}
-          <a href="#" className="hover:text-bone">
+          <a href="#" className="transition-colors hover:text-bone">
             FAQ
           </a>
-          <span aria-hidden="true">·</span>
+          <span aria-hidden="true" className="hidden md:inline">·</span>
           {/* TODO(post-launch): /press route */}
-          <a href="#" className="hover:text-bone">
+          <a href="#" className="transition-colors hover:text-bone">
             Press
           </a>
-          <span aria-hidden="true">·</span>
-          <a href="mailto:hello@lixx.in" className="hover:text-bone">
+          <span aria-hidden="true" className="hidden md:inline">·</span>
+          <a href="mailto:hello@lixx.in" className="transition-colors hover:text-bone">
             hello@lixx.in
           </a>
-          <span aria-hidden="true">·</span>
+          <span aria-hidden="true" className="hidden md:inline">·</span>
           {/* TODO(pre-launch): replace [pending] with the real FSSAI Central License number */}
           <span>FSSAI Lic. No. [pending] · Nutraceutical</span>
         </div>

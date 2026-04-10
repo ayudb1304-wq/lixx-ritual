@@ -289,9 +289,13 @@ export function Beat05DayArc() {
         style={{ opacity: 0 }}
       />
 
-      {/* Time rail — three stacked labels, top-right */}
-      <div className="pointer-events-none absolute right-0 top-0 p-md md:p-lg">
-        <div className="relative h-[3rem] w-[6rem] md:h-[4rem] md:w-[8rem]">
+      {/* Time rail — three stacked labels, top-right, offset below the
+          fixed nav so it never collides with the "Get the box" pill. */}
+      <div
+        className="pointer-events-none absolute right-0 px-md md:px-lg"
+        style={{ top: "calc(var(--nav-h) + 0.75rem)" }}
+      >
+        <div className="relative h-[2.5rem] w-[5rem] md:h-[4rem] md:w-[8rem]">
           {SKUS.map((sku) => (
             <p
               key={sku.key}
@@ -305,12 +309,14 @@ export function Beat05DayArc() {
         </div>
       </div>
 
-      {/* SKU lockups — three absolutely-stacked lockups, cross-fade */}
+      {/* SKU lockups — three absolutely-stacked lockups, cross-fade. The
+          top padding matches the nav so headlines never drift under it. */}
       {SKUS.map((sku) => (
         <div
           key={sku.key}
           data-lockup={sku.key}
           className="absolute inset-0 flex items-center justify-center px-md"
+          style={{ paddingTop: "var(--nav-h)" }}
         >
           <SkuLockup sku={sku} />
         </div>
@@ -334,7 +340,14 @@ function SkuLockup({ sku }: { sku: Sku }) {
       </h2>
 
       <div data-lolli={sku.key} className="my-sm">
-        <LollipopRender color={sku.key} size={170} glow={isDream} />
+        {/* Mobile (smaller so the full lockup fits short viewports) */}
+        <div className="md:hidden">
+          <LollipopRender color={sku.key} size={130} glow={isDream} />
+        </div>
+        {/* Desktop */}
+        <div className="hidden md:block">
+          <LollipopRender color={sku.key} size={170} glow={isDream} />
+        </div>
       </div>
 
       <p className="max-w-2xl font-sans text-body text-mute">{sku.sub}</p>

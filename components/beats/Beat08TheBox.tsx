@@ -115,7 +115,7 @@ export function Beat08TheBox() {
         }}
       >
         <div
-          className="relative aspect-[3/2] w-full"
+          className="relative aspect-[4/3] w-full md:aspect-[3/2]"
           style={{ transformStyle: "preserve-3d" }}
         >
           {/* Box interior */}
@@ -128,7 +128,7 @@ export function Beat08TheBox() {
           >
             <div
               data-grid
-              className="grid h-full w-full grid-cols-5 grid-rows-3 items-center justify-items-center gap-xs px-md py-sm"
+              className="grid h-full w-full grid-cols-5 grid-rows-3 items-center justify-items-center gap-1 p-3 md:gap-xs md:px-md md:py-sm"
             >
               {GRID.map((sku, i) => (
                 <div
@@ -139,7 +139,14 @@ export function Beat08TheBox() {
                     filter: "drop-shadow(0 6px 8px rgba(0,0,0,0.55))",
                   }}
                 >
-                  <LollipopRender color={sku} size={48} />
+                  {/* Mobile: smaller so the 5x3 grid fits a 311-wide box */}
+                  <div className="md:hidden">
+                    <LollipopRender color={sku} size={34} />
+                  </div>
+                  {/* Desktop */}
+                  <div className="hidden md:block">
+                    <LollipopRender color={sku} size={48} />
+                  </div>
                 </div>
               ))}
             </div>

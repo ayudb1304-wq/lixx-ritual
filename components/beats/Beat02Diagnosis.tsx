@@ -117,7 +117,11 @@ export function Beat02Diagnosis() {
       ref={rootRef}
       aria-label="The Urban Millennial Paradox"
       className="relative flex min-h-[100svh] flex-col items-center justify-center gap-lg bg-ink px-md text-bone"
-      style={{ transition: "none" }}
+      style={{
+        transition: "none",
+        paddingTop: "calc(var(--nav-h) + 1rem)",
+        paddingBottom: "calc(var(--nav-h) + 1rem)",
+      }}
     >
       <div className="max-w-5xl text-center">
         <p className="font-mono text-eyebrow uppercase tracking-eyebrow">
