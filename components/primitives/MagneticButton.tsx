@@ -7,6 +7,7 @@ import { useReducedMotion } from "@/lib/hooks/useReducedMotion";
 type MagneticButtonProps = {
   children: ReactNode;
   href?: string;
+  target?: "_blank" | "_self";
   className?: string;
   radius?: number;
   strength?: number;
@@ -21,6 +22,7 @@ type MagneticButtonProps = {
 export function MagneticButton({
   children,
   href,
+  target,
   className,
   radius = 120,
   strength = 0.35,
@@ -74,10 +76,13 @@ export function MagneticButton({
   };
 
   if (href) {
+    const isExternalNewTab = target === "_blank";
     return (
       <a
         ref={ref as React.RefObject<HTMLAnchorElement>}
         href={href}
+        target={target}
+        rel={isExternalNewTab ? "noopener noreferrer" : undefined}
         {...commonProps}
       >
         {children}

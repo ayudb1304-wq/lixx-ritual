@@ -2,7 +2,7 @@
 
 Story-driven landing page for **Lixx**, an Isomalt-based functional lollipop brand from Bangalore. Three SKUs — **Charge** (3 PM energy), **Zen** (7 PM calm), **Dream** (11 PM sleep). Box of 15 for ₹499 on Blinkit, Zepto, Instamart.
 
-Current state: Phase 2 — foundation + beats 01–04 + 06. Beats 05, 07, 08, 09 still placeholder. See `docs/phase-1-plan.md` and `docs/phase-2-plan.md` for scope. `docs/design.md` defines the 9-beat narrative; `docs/implementation (1).md` is the canonical build spec. Strategic context lives in `docs/Lixx doc 1.md`.
+Current state: Phase 3 — foundation + beats 01–07. Beats 08 and 09 still placeholder. See `docs/phase-1-plan.md`, `docs/phase-2-plan.md`, and `docs/phase-3-plan.md` for scope. `docs/design.md` defines the 9-beat narrative; `docs/implementation (1).md` is the canonical build spec. Strategic context lives in `docs/Lixx doc 1.md`.
 
 ## Quickstart
 
@@ -29,9 +29,11 @@ Open http://localhost:3000.
 - **02 Diagnosis** — pinned, scrubbed, background ink → bone inversion, 52% count-up on three stat cards.
 - **03 Reveal** — "Not a gummy. Not a pill. A ritual." LollipopRender at center, Lenis slows to 2.4s on enter.
 - **04 Third Wave** — pinned horizontal scroll-jack across three panels; Waves 1 & 2 desaturated, Wave 3 ignites in charge yellow with a LollipopRender as it centers.
+- **05 Day Arc (SPINE)** — pinned `+=400%` scrub. Three SKU lockups (Charge 15:00 → Zen 19:00 → Dream 23:00) cross-fade through three background palettes with three distinct motion registers. Dream climax dims the viewport and powers up the lollipop glow.
 - **06 Science** — two-column, four proof points with `scaleX` underline reveals; SWAP POINT for the dissolving-Isomalt macro shot.
+- **07 Ten Minutes** — pace whiplash. Mega "10", three magnetic Q-comm CTAs (Blinkit / Zepto / Instamart). Homepage URLs with a `TODO(post-launch)` for product deep-links.
 
-**Still placeholder:** Beats 05 (Day Arc SPINE — Phase 3), 07 (10-Minute Promise — Phase 3), 08 (Box — Phase 4), 09 (Sign-Off — Phase 4).
+**Still placeholder:** Beats 08 (Box — Phase 4), 09 (Sign-Off — Phase 4).
 
 ## Swap points
 
@@ -55,5 +57,4 @@ Motion serves narrative, never decorates. Every animation has an in, a hold, and
 
 ## What's next
 
-Phase 3 — Beat 05 (Day Arc SPINE, the climax) + Beat 07 (10-Minute Promise, magnetic CTAs)
-Phase 4 — Beat 08 (Box), Beat 09 (Sign-Off), Lighthouse ≥95/100 polish, OG image, favicon, real FSSAI number, analytics
+Phase 4 — Beat 08 (Box lid-lift), Beat 09 (Sign-Off), Lighthouse ≥95/100 polish, OG image, favicon, real FSSAI number, analytics, real Q-comm deep-links
