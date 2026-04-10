@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------------------------------------
+   Lixx — Design Tokens
+   Source of truth: design.md § 4 & § 5
+   ----------------------------------------------------------- */
+:root {
+  /* Font families — sourced via @fontsource-variable/* in app/layout.tsx */
+  --font-sans:    "Inter Variable", system-ui, sans-serif;
+  --font-display: "Fraunces Variable", "Inter Variable", serif;
+  --font-mono:    "JetBrains Mono Variable", ui-monospace, monospace;
+
+  /* Color */
+  --color-ink:    #0a0a0c;
+  --color-bone:   #f4f1ea;
+  --color-char:   #16161a;
+  --color-mute:   #6b6b73;
+  --color-charge: #f5d547;
+  --color-zen:    #c9b8d9;
+  --color-dream:  #2a2c5f;
+
+  /* Fluid type scale (clamp: min @ 375px → max @ 1440px) */
+  --fs-eyebrow: clamp(0.7rem,  0.68rem + 0.1vw,  0.8rem);
+  --fs-body:    clamp(1rem,    0.97rem + 0.13vw, 1.125rem);
+  --fs-sub:     clamp(1.125rem, 1.05rem + 0.36vw, 1.5rem);
+  --fs-h3:      clamp(2rem,    1.7rem + 1.45vw,  3.5rem);
+  --fs-h2:      clamp(2.75rem, 2.21rem + 2.67vw, 5.5rem);
+  --fs-h1:      clamp(3.25rem, 2.42rem + 4.11vw, 7.5rem);
+  --fs-mega:    clamp(4rem,    2.58rem + 7.06vw, 11rem);
+
+  /* Motion */
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-power4: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --dur-fast: 0.4s;
+  --dur-base: 0.8s;
+  --dur-slow: 1.6s;
+}
+
+/* -----------------------------------------------------------
+   Base
+   ----------------------------------------------------------- */
+html {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-bone);
+  color: var(--color-ink);
+}
+
+/* -----------------------------------------------------------
+   Lenis
+   ----------------------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* -----------------------------------------------------------
+   Split-text primitives
+   ----------------------------------------------------------- */
+.split-line {
+  display: block;
+  overflow: hidden;
+  /* Padding prevents descender clipping during the yPercent tween */
+  padding-bottom: 0.15em;
+  margin-bottom: -0.15em;
+}
+
+.split-word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* -----------------------------------------------------------
+   Reduced motion — hard override
+   ----------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
